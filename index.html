@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lund — Bairro Bavária, Gramado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #F0EAE0;
+      --warm:    #E8E0D4;
+      --charcoal:#1A1915;
+      --mid:     #4A4640;
+      --gold:    #8C7355;
+      --light:   #FAF7F3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--light);
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #hero-bg {
+      position: absolute; inset: 0;
+      background: url('lund-15547-novo/Imagens/Externas/Fachada.jpg') center center / cover no-repeat;
+      filter: brightness(0.62);
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+    #hero-bg.loaded { transform: scale(1); }
+
+    #hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(26,25,21,0.18) 0%, rgba(26,25,21,0.55) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 0 24px;
+    }
+
+    .lund-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(64px, 12vw, 128px);
+      letter-spacing: 0.28em;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-line {
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.6);
+      margin: 0 auto 22px;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(17px, 2.4vw, 24px);
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeFloat 3s ease-in-out infinite;
+    }
+
+    .scroll-arrow {
+      width: 1px;
+      height: 28px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    @keyframes fadeFloat {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50%       { opacity: 0.8; transform: translateX(-50%) translateY(4px); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 24px; }
+
+    .container { max-width: 1080px; margin: 0 auto; }
+    .container-narrow { max-width: 720px; margin: 0 auto; }
+
+    /* ── MANIFESTO ── */
+    #manifesto {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 120px 24px;
+    }
+
+    .manifesto-pre {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+
+    .manifesto-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.35;
+      margin-bottom: 48px;
+      color: #fff;
+    }
+
+    .manifesto-body {
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(240,234,224,0.72);
+      max-width: 640px;
+    }
+
+    .manifesto-body p + p { margin-top: 20px; }
+
+    /* ── ORIGEM ── */
+    #origem {
+      background: var(--light);
+      padding: 110px 24px;
+    }
+
+    .origem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(30px, 3.8vw, 50px);
+      line-height: 1.2;
+      margin-bottom: 32px;
+    }
+
+    .section-body {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--mid);
+    }
+
+    .section-body p + p { margin-top: 16px; }
+
+    .origem-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+    }
+
+    /* ── NÚMEROS ── */
+    #numeros {
+      background: var(--cream);
+      padding: 80px 24px;
+    }
+
+    .numeros-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(140,115,85,0.18);
+    }
+
+    .numero-item {
+      background: var(--cream);
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .numero-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .numero-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── TIPOLOGIAS ── */
+    #tipologias {
+      background: var(--light);
+      padding: 110px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .tipos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(140,115,85,0.14);
+    }
+
+    .tipo-card {
+      background: var(--light);
+      padding: 52px 40px;
+      position: relative;
+    }
+
+    .tipo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .tipo-area {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .tipo-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .tipo-details {
+      list-style: none;
+    }
+
+    .tipo-details li {
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(140,115,85,0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tipo-details li::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── GALERIA ── */
+    #galeria {
+      padding: 0;
+      background: var(--charcoal);
+    }
+
+    .galeria-header {
+      padding: 80px 24px 56px;
+      text-align: center;
+      color: var(--cream);
+    }
+
+    .galeria-header .section-label { color: var(--gold); }
+    .galeria-header .section-title { color: #fff; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 3px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.6s ease;
+      filter: brightness(0.92);
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      filter: brightness(1);
+    }
+
+    .gal-tall { grid-row: span 2; }
+
+    .gallery-item {
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .gallery-item.gal-tall { aspect-ratio: auto; }
+
+    /* ── DIFERENCIAIS ── */
+    #diferenciais {
+      background: var(--light);
+      padding: 110px 24px;
+    }
+
+    .dif-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 80px;
+      margin-top: 64px;
+    }
+
+    .dif-item {}
+
+    .dif-icon {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .dif-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .dif-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--mid);
+    }
+
+    /* ── LOCALIZAÇÃO ── */
+    #localizacao {
+      padding: 0;
+      position: relative;
+    }
+
+    .loc-img-wrap {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+    }
+
+    .loc-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.55);
+    }
+
+    .loc-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      padding: 24px;
+    }
+
+    .loc-overlay .section-label { color: rgba(240,234,224,0.6); }
+
+    .loc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .loc-address {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+    }
+
+    /* ── CTA FINAL ── */
+    #cta {
+      background: var(--charcoal);
+      padding: 120px 24px;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(32px, 4.5vw, 58px);
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .cta-sub {
+      font-size: 14px;
+      color: rgba(240,234,224,0.5);
+      letter-spacing: 0.08em;
+      margin-bottom: 56px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 44px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+
+    .btn-whatsapp svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .cta-fine {
+      margin-top: 28px;
+      font-size: 11px;
+      color: rgba(240,234,224,0.3);
+      letter-spacing: 0.14em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #141412;
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(240,234,224,0.2);
+      letter-spacing: 0.14em;
+    }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      section { padding: 72px 20px; }
+
+      .origem-grid { grid-template-columns: 1fr; gap: 40px; }
+      .origem-img { height: 320px; }
+
+      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .tipos-grid { grid-template-columns: 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gal-tall { grid-row: auto; }
+
+      .dif-grid { grid-template-columns: 1fr; gap: 40px; }
+
+      .loc-img-wrap { height: 420px; }
+    }
+
+    @media (max-width: 480px) {
+      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <div id="hero-bg"></div>
+  <div id="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="lund-logo">Lund</div>
+    <div class="hero-line"></div>
+    <p class="hero-tagline">Aqui o viver desacelera.</p>
+    <p class="hero-sub">Bairro Bavária &nbsp;·&nbsp; Gramado, RS</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Conheça</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MANIFESTO ════════════════════════════ -->
+<section id="manifesto">
+  <div class="container-narrow reveal">
+    <p class="manifesto-pre">O Empreendimento</p>
+    <h2 class="manifesto-headline">
+      Alguns luxos são silenciosos.<br>
+      E são esses que permanecem.
+    </h2>
+    <div class="manifesto-body">
+      <p>O Lund nasceu com um propósito claro: oferecer um lugar autêntico, onde natureza, arquitetura e tempo convivem em equilíbrio.</p>
+      <p>O bosque é parte da experiência. A luz entra sem pedir licença. A vista traz a natureza para dentro de casa. Cada escolha do Lund foi feita com intenção — linhas limpas, materiais atemporais, proporções calmas.</p>
+      <p>Mais do que um endereço, Lund é uma escolha de como habitar o tempo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ NÚMEROS ═════════════════════════════ -->
+<section id="numeros">
+  <div class="container">
+    <div class="numeros-grid">
+      <div class="numero-item reveal">
+        <div class="numero-val">12</div>
+        <div class="numero-label">Unidades exclusivas</div>
+      </div>
+      <div class="numero-item reveal" style="transition-delay:.1s">
+        <div class="numero-val">3</div>
+        <div class="numero-label">Apartamentos por andar</div>
+      </div>
+      <div class="numero-item reveal" style="transition-delay:.2s">
+        <div class="numero-val">1.100<span style="font-size:.5em">m²</span></div>
+        <div class="numero-label">De jardins e bosque</div>
+      </div>
+      <div class="numero-item reveal" style="transition-delay:.3s">
+        <div class="numero-val">Dez.<span style="font-size:.45em">&nbsp;2028</span></div>
+        <div class="numero-label">Previsão de entrega</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ ORIGEM ═══════════════════════════════ -->
+<section id="origem">
+  <div class="container">
+    <div class="origem-grid">
+      <div class="reveal">
+        <p class="section-label">A Origem do Nome</p>
+        <h2 class="section-title">Do bosque nórdico<br>ao coração da Serra</h2>
+        <div class="section-body">
+          <p>Lund nasce da raiz mais antiga do norte europeu. No antigo nórdico, <em>lundr</em> significa bosque — um espaço sagrado de proteção, serenidade e vitalidade.</p>
+          <p>Inspirado na cidade sueca de Lund — berço de catedrais centenárias e uma das universidades mais prestigiadas da Escandinávia —, o empreendimento transforma o conceito de bosque em experiência habitacional.</p>
+          <p>Aqui, o bosque não é paisagem. É parte da arquitetura. É parte da vida.</p>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.15s">
+        <img class="origem-img" src="lund-15547-novo/Imagens/Externas/Jardim 1.jpg" alt="Jardim noturno Lund" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ TIPOLOGIAS ═══════════════════════════ -->
+<section id="tipologias">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Plantas</p>
+      <h2 class="section-title">Cinco tipologias.<br>Uma mesma essência.</h2>
+    </div>
+
+    <div class="tipos-grid">
+      <div class="tipo-card reveal">
+        <div class="tipo-name">Lund Garden</div>
+        <div class="tipo-area">96 m² — 109 m²</div>
+        <div class="tipo-divider"></div>
+        <ul class="tipo-details">
+          <li>Varanda privada</li>
+          <li>2 ou 3 suítes</li>
+          <li>Lavabo</li>
+          <li>Integração com o bosque</li>
+        </ul>
+      </div>
+
+      <div class="tipo-card reveal" style="transition-delay:.1s">
+        <div class="tipo-name">Lund Apartamento</div>
+        <div class="tipo-area">68 m² — 80 m²</div>
+        <div class="tipo-divider"></div>
+        <ul class="tipo-details">
+          <li>2 suítes</li>
+          <li>Lavabo</li>
+          <li>Esquadrias piso-teto</li>
+          <li>Vista para nascer ou pôr do sol</li>
+        </ul>
+      </div>
+
+      <div class="tipo-card reveal" style="transition-delay:.2s">
+        <div class="tipo-name">Lund Cobertura</div>
+        <div class="tipo-area">81 m²</div>
+        <div class="tipo-divider"></div>
+        <ul class="tipo-details">
+          <li>2 suítes</li>
+          <li>Lavabo</li>
+          <li>Pé-direito duplo</li>
+          <li>Amplitude única</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top:40px; font-size:12px; letter-spacing:0.14em; color:var(--gold);">
+      A partir de R$ 1.650.000 &nbsp;·&nbsp; Consulte condições
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════ GALERIA ════════════════════════════ -->
+<section id="galeria">
+  <div class="galeria-header reveal">
+    <p class="section-label">Galeria</p>
+    <h2 class="section-title" style="color:#fff;">O espaço que fala<br>por si mesmo.</h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item gal-tall">
+      <img src="lund-15547-novo/Imagens/Internas/Living Garden.jpg" alt="Living Garden" />
+    </div>
+    <div class="gallery-item">
+      <img src="lund-15547-novo/Imagens/Internas/Living.jpg" alt="Living" />
+    </div>
+    <div class="gallery-item">
+      <img src="lund-15547-novo/Imagens/Externas/Jardim 2.jpg" alt="Jardim" />
+    </div>
+    <div class="gallery-item">
+      <img src="lund-15547-novo/Imagens/Internas/Living cobertura.jpg" alt="Living Cobertura" />
+    </div>
+    <div class="gallery-item">
+      <img src="lund-15547-novo/Imagens/Internas/Hall de entrada.jpg" alt="Hall de entrada" />
+    </div>
+    <div class="gallery-item">
+      <img src="lund-15547-novo/Imagens/Externas/Jardim 3.jpg" alt="Jardim 3" />
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ DIFERENCIAIS ═════════════════════════ -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Diferenciais</p>
+      <h2 class="section-title">Cada detalhe foi<br>escolhido com intenção.</h2>
+    </div>
+
+    <div class="dif-grid">
+      <div class="dif-item reveal">
+        <div class="dif-icon"></div>
+        <div class="dif-title">Apenas 3 unidades por andar</div>
+        <p class="dif-text">Privacidade e silêncio que só a raridade pode oferecer. Corredores sem movimento. Vizinhança sem pressa.</p>
+      </div>
+
+      <div class="dif-item reveal" style="transition-delay:.1s">
+        <div class="dif-icon"></div>
+        <div class="dif-title">1.100 m² de jardins e bosque</div>
+        <p class="dif-text">O verde não é ornamento — é estrutura. Lounges externos, fireplaces, caminhos arborizados e água que volta da chuva para regar o que é vivo.</p>
+      </div>
+
+      <div class="dif-item reveal" style="transition-delay:.2s">
+        <div class="dif-icon"></div>
+        <div class="dif-title">Esquadrias piso-teto</div>
+        <p class="dif-text">A luz entra sem pedir licença. Em cada unidade, o exterior é parte da composição — não uma moldura, mas continuidade.</p>
+      </div>
+
+      <div class="dif-item reveal" style="transition-delay:.3s">
+        <div class="dif-icon"></div>
+        <div class="dif-title">Vista para o nascer e o pôr do sol</div>
+        <p class="dif-text">Todas as unidades foram orientadas para capturar a luz em seu melhor momento. Um privilégio que se renova a cada amanhecer.</p>
+      </div>
+
+      <div class="dif-item reveal" style="transition-delay:.4s">
+        <div class="dif-icon"></div>
+        <div class="dif-title">30 vagas privativas + visitantes</div>
+        <p class="dif-text">Infraestrutura que corresponde ao padrão do empreendimento. Nenhum compromisso com o conforto é pequeno.</p>
+      </div>
+
+      <div class="dif-item reveal" style="transition-delay:.5s">
+        <div class="dif-icon"></div>
+        <div class="dif-title">Ao lado do Hotel Bavaria Sport</div>
+        <p class="dif-text">No endereço mais desejado do Bairro Bavária, em Gramado — um dos destinos mais valorizados da Serra Gaúcha.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ IMAGEM INTERNA ════════════════════════ -->
+<div style="height:520px; overflow:hidden; position:relative;">
+  <img src="lund-15547-novo/Imagens/Internas/Suíte apto 01.jpg" alt="Suíte Lund"
+       style="width:100%; height:100%; object-fit:cover; filter:brightness(0.85); display:block;" />
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+    <blockquote style="font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+      font-size:clamp(22px,3.2vw,40px); color:#fff; text-align:center; padding:24px;
+      text-shadow:0 2px 16px rgba(0,0,0,0.4); max-width:680px; line-height:1.4;">
+      "Aqui, o bosque não é paisagem.<br>É parte da arquitetura. É parte da vida."
+    </blockquote>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ LOCALIZAÇÃO ══════════════════════════ -->
+<section id="localizacao">
+  <div class="loc-img-wrap">
+    <img src="lund-15547-novo/Imagens/Externas/Inserção.jpg" alt="Localização Lund Gramado" />
+    <div class="loc-overlay">
+      <p class="section-label" style="color:rgba(240,234,224,.55); margin-bottom:16px;">Localização</p>
+      <h2 class="loc-title">Bairro Bavária<br>Gramado, RS</h2>
+      <p class="loc-address">Rua da Bavária, 321 &nbsp;·&nbsp; Ao lado do Hotel Bavaria Sport</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CTA ══════════════════════════════ -->
+<section id="cta">
+  <div class="container-narrow reveal">
+    <p class="cta-eyebrow">Unidades limitadas</p>
+    <h2 class="cta-title">Só há espaço<br>para quem decide agora.</h2>
+    <p class="cta-sub">12 unidades · em construção · entrega dezembro de 2028</p>
+
+    <a class="btn-whatsapp"
+       href="https://wa.me/5554991160665?text=Olá%2C%20tenho%20interesse%20no%20Lund%20Gramado.%20Poderia%20me%20enviar%20mais%20informações%3F"
+       target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+      Falar com um consultor
+    </a>
+
+    <p class="cta-fine">(54) 99116-0665 &nbsp;·&nbsp; Atendimento exclusivo</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <p>LUND &nbsp;·&nbsp; Rua da Bavária, 321 — Bairro Bavária, Gramado / RS &nbsp;·&nbsp; © 2025</p>
+  <p style="margin-top:8px;">Imagens meramente ilustrativas. Informações sujeitas a alteração sem aviso prévio.</p>
+</footer>
+
+<script>
+  // Hero parallax / image load
+  window.addEventListener('load', () => {
+    document.getElementById('hero-bg').classList.add('loaded');
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
